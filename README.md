@@ -6,7 +6,7 @@ First compile using clang with the command
 ```
 clang++ -o <filename> <filename>.cpp
 ```
-Then run the program
+This created an executable binary file. Then run the program
 ```
 ./<filename>
 ```
