@@ -1,6 +1,8 @@
 # cplusplus
 Learning c++
 
+Based on: https://learnmoderncpp.com/
+
 ### Running a file
 First compile using clang with the command
 ```

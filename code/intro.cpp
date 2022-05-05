@@ -10,5 +10,7 @@
 */
 int main() { 
   // cout -> character output from Standard Library, << stream insertion operator
-  std::cout << "Hello World!" << '\n'; 
+  std::cout << "Hello World!" << '\n'  + 7;
+  std::cout << "$USD \u20ACEURO \u20ACPD  \u03C0"
+             << '\n';
 }
