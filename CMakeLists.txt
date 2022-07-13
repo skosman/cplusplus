@@ -7,7 +7,7 @@ project(cpp_cache LANGUAGES CXX)
 # Set C++ version
 set(CMAKE_CXX_STANDARD 20)
 
-find_package(glfw3 3.3 REQUIRED)
+find_package(glfw3 3.2 REQUIRED)
 find_package(OpenGL REQUIRED)
 
 # Add program target called test_matrix_tran
