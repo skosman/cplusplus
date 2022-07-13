@@ -10,7 +10,7 @@ set(CMAKE_CXX_STANDARD 20)
 # Add program target 
 add_executable(gg glfw.cpp)
 
-find_package(glfw3 3.2 REQUIRED)
+find_package(OpenGL REQUIRED)
 find_package(GLUT REQUIRED)
 
 include_directories( ${OPENGL_INCLUDE_DIRS}  ${GLUT_INCLUDE_DIRS} )
