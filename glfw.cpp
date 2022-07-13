@@ -1,40 +1,47 @@
-#include <GL\glew.h>     //Include GLEW for function-pointers etc.
-#include <GLFW\GLFW3.h>  //Include GLFW for windows, context etc.
-                         //Important note: GLEW must NEVER be included after 
-                         //gl.h is already included(which is included in glew.h 
-                         //and glfw3.h) so if you want to include one of these
-                         //headers again, wrap them
-                         //into #ifndef __gl_h_ directives just to be sure
+#include <GLFW/glfw3.h>
+#include <stdlib.h>
+#include <stdio.h>
 
-GLFWwindow* window;      //This is the GLFW handle for a window, it is used in several 
-                         //GLFW functions, so make sure it is accessible
-
-void createWindow()
+int main(void)
 {
-    glewExperimental = GL_TRUE; //This is required to use functions not included 
-                                //in opengl.lib
+  GLFWwindow* window;
+  if (!glfwInit())
+    exit(EXIT_FAILURE);
+  window = glfwCreateWindow(640, 480, "Chapter 1: Simple GLFW Example", NULL, NULL);
+  if (!window)
+  {
+    glfwTerminate();
+    exit(EXIT_FAILURE);
+  }
+  glfwMakeContextCurrent(window);
+  while (!glfwWindowShouldClose(window))
+  {
+      float ratio;
+    int width, height;
 
-    if(!glfwInit())             //Inititalizes the library
-        return;
+    glfwGetFramebufferSize(window, &width, &height);
+    ratio = (float) width / (float) height;
 
-    glfwDefaultWindowHints();   //See second example
-
-    window = glfwCreateWindow(WIDTH, HEIGHT, title, NULL, NULL);
-    //Creates a window with the following parameters:
-    // + int width: Width of the window to be created
-    // + int height: Height of the window to be created
-    // + const char* title: Title of the window to be created
-    // + GLFWmonitor* monitor: If this parameter is non-NULL, the window will be 
-    //   created in fullscreen mode, covering the specified monitor. Monitors can be  
-    //   queried using either glfwGetPrimaryMonitor() or glfwGetMonitors()
-    // + GLFWwindow* share: For more information about this parameter, please
-    //   consult the documentation
-
-    glfwMakeContextCurrent(window);
-    //Creates a OpenGL context for the specified window
-    glfwSwapInterval(0);
-    //Specifies how many monitor-refreshes GLFW should wait, before swapping the 
-    //backbuffer and the displayed frame. Also know as V-Sync
-    glewInit();
-    //Initializes GLEW
+    glViewport(0, 0, width, height);
+    glClear(GL_COLOR_BUFFER_BIT);
+        glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glOrtho(-ratio, ratio, -1.f, 1.f, 1.f, -1.f);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+        glRotatef((float)glfwGetTime() * 50.f, 0.f, 0.f, 1.f);
+    glBegin(GL_TRIANGLES);
+    glColor3f(1.f, 0.f, 0.f);
+    glVertex3f(-0.6f, -0.4f, 0.f);
+    glColor3f(0.f, 1.f, 0.f);
+    glVertex3f(0.6f, -0.4f, 0.f);
+    glColor3f(0.f, 0.f, 1.f);
+    glVertex3f(0.f, 0.6f, 0.f);
+    glEnd();
+        glfwSwapBuffers(window);
+    glfwPollEvents();
+  }
+    glfwDestroyWindow(window);
+  glfwTerminate();
+  exit(EXIT_SUCCESS);
 }
