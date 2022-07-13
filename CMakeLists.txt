@@ -7,10 +7,12 @@ project(cpp_cache LANGUAGES CXX)
 # Set C++ version
 set(CMAKE_CXX_STANDARD 20)
 
-find_package(glfw3 3.2 REQUIRED)
-find_package(OpenGL REQUIRED)
-
-# Add program target called test_matrix_tran
+# Add program target 
 add_executable(gg glfw.cpp)
 
-target_link_libraries(gg OpenGL::GL)
+find_package(glfw3 3.2 REQUIRED)
+find_package(GLUT REQUIRED)
+
+include_directories( ${OPENGL_INCLUDE_DIRS}  ${GLUT_INCLUDE_DIRS} )
+target_link_libraries(gg ${OPENGL_LIBRARIES} ${GLUT_LIBRARY} )
+
